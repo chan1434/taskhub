@@ -4,6 +4,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 import WelcomeScreen from './screens/WelcomeScreen';
 import SignInScreen from './screens/SignInScreen';
 import SignUpScreen from './screens/SignUpScreen';
+import DashboardScreen from './screens/DashboardScreen';
+import AccountSettingsScreen from './screens/AccountSettingsScreen';
+import SettingsScreen from './screens/SettingsScreen';
 
 const Stack = createStackNavigator();
 
@@ -37,6 +40,9 @@ const App = () => {
             headerTintColor: '#fff',
           }}
         />
+        <Stack.Screen name="Dashboard" component={DashboardScreen} />
+        <Stack.Screen name="Settings" component={SettingsScreen} />
+        <Stack.Screen name="AccountSettings" component={AccountSettingsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -1,20 +1,15 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 
-const SignUpScreen = () => {
-  const [passwordVisible, setPasswordVisible] = useState(false);
-  const [email, setEmail] = useState('');
+const SignUpScreen = ({ navigation }) => {
   const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [verifyPassword, setVerifyPassword] = useState('');
 
   const handleSignUp = () => {
-    if (password !== verifyPassword) {
-      Alert.alert('Error', 'Passwords do not match');
-      return;
-    }
-    Alert.alert('Success', `Account created for ${name}!`);
+    // Add registration logic here
+    console.log('Signing up with:', { name, email, password });
+    navigation.navigate('Dashboard'); // Navigate to Dashboard
   };
 
   return (
@@ -22,40 +17,30 @@ const SignUpScreen = () => {
       <Text style={styles.title}>Sign Up</Text>
       <TextInput
         style={styles.input}
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-      />
-      <TextInput
-        style={styles.input}
         placeholder="Name"
         value={name}
         onChangeText={setName}
       />
-      <View style={styles.passwordContainer}>
-        <TextInput
-          style={styles.input}
-          placeholder="Password"
-          secureTextEntry={!passwordVisible}
-          value={password}
-          onChangeText={setPassword}
-        />
-        <Icon
-          name={passwordVisible ? 'eye' : 'eye-off'}
-          size={24}
-          color="gray"
-          onPress={() => setPasswordVisible(!passwordVisible)}
-        />
-      </View>
       <TextInput
         style={styles.input}
-        placeholder="Verify password"
-        secureTextEntry={!passwordVisible}
-        value={verifyPassword}
-        onChangeText={setVerifyPassword}
+        placeholder="Email"
+        value={email}
+        onChangeText={setEmail}
+        keyboardType="email-address"
+        autoCapitalize="none"
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Password"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
       />
       <TouchableOpacity style={styles.button} onPress={handleSignUp}>
         <Text style={styles.buttonText}>Sign Up</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
+        <Text style={styles.linkText}>Already have an account? Sign In</Text>
       </TouchableOpacity>
     </View>
   );
@@ -64,9 +49,10 @@ const SignUpScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#EAF6FF',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    padding: 20,
   },
   title: {
     fontSize: 28,
@@ -75,37 +61,32 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   input: {
-    width: '80%',
-    height: 50,
-    borderWidth: 1,
-    borderColor: '#007BFF',
-    borderRadius: 8,
-    paddingHorizontal: 10,
-    marginBottom: 15,
-  },
-  passwordContainer: {
-    width: '80%',
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#007BFF',
+    width: '100%',
+    height: 40,
+    backgroundColor: '#fff',
     borderRadius: 8,
     marginBottom: 15,
     paddingHorizontal: 10,
+    borderColor: '#007BFF',
+    borderWidth: 1,
   },
   button: {
-    width: '80%',
-    height: 50,
+    width: '100%',
+    height: 40,
     backgroundColor: '#007BFF',
+    borderRadius: 8,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 8,
-    marginBottom: 15,
+    marginBottom: 10,
   },
   buttonText: {
     color: '#fff',
-    fontSize: 18,
-    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  linkText: {
+    color: '#007BFF',
+    marginTop: 10,
+    textDecorationLine: 'underline',
   },
 });
 
