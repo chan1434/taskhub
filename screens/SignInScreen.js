@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const SignInScreen = () => {
+const SignInScreen = ({ navigation }) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
@@ -37,6 +37,12 @@ const SignInScreen = () => {
       </View>
       <TouchableOpacity style={styles.button} onPress={handleSignIn}>
         <Text style={styles.buttonText}>Sign In</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.linkButton}
+        onPress={() => navigation.navigate('SignUp')}
+      >
+        <Text style={styles.linkText}>Don't have an account? Sign Up</Text>
       </TouchableOpacity>
     </View>
   );
@@ -87,6 +93,13 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  linkButton: {
+    marginTop: 10,
+  },
+  linkText: {
+    color: '#007BFF',
+    fontSize: 16,
   },
 });
 
